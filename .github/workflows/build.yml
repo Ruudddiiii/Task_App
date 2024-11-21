@@ -29,10 +29,21 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wget unzip
+          
+          # Download and unzip the SDK tools
           wget https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
           unzip commandlinetools-linux-7302050_latest.zip -d $HOME/android-sdk
+
+          # Install the SDK packages including build-tools and platforms
           echo "y" | $HOME/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/android-sdk "platform-tools" "build-tools;30.0.3" "platforms;android-33"
+
+          # Install AIDL if it's missing
+          echo "y" | $HOME/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/android-sdk "build-tools;30.0.3"
+
+          # Accept licenses
           echo "y" | $HOME/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/android-sdk --licenses
+          
+          # Set environment variables
           export ANDROID_HOME=$HOME/android-sdk
           export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/bin:$PATH
 
