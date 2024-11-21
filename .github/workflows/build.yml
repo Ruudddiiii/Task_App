@@ -1,5 +1,4 @@
-# Tested: 2024/08/05
-# by Kasper Arfman
+
 name: Build APK
 on: [push]
 jobs:
