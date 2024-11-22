@@ -25,7 +25,7 @@ source.exclude_dirs = tests, bin, venv
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,pillow,kivymd,requests,json,datetime
+requirements = python3,kivy,pillow,kivymd,requests,datetime
 
 # (str) Custom source folders for requirements
 # requirements.source.kivy = ../../kivy
