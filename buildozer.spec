@@ -63,7 +63,7 @@ osx.kivy_version = 2.1.0
 fullscreen = 0
 
 # (list) Permissions for Android (adjust for your app needs)
-android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE
+android.permissions = android.permission.INTERNET,android.permission.WRITE_EXTERNAL_STORAGE,android.permission.READ_EXTERNAL_STORAGE
 
 # (list) Android features (add tags to the manifest)
 # android.features = android.hardware.usb.host
