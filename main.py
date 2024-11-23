@@ -13,7 +13,7 @@ from datetime import datetime
 # GitHub settings
 GITHUB_USERNAME = 'Ruudddiiii'
 REPO_NAME = 'TaskTravelTime'
-GITHUB_TOKEN = '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'
+GITHUB_TOKEN = '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'
 TASK_FILE = 'task1.json'
 
 # GitHub API URLs
