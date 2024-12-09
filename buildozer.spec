@@ -46,7 +46,7 @@ android.archs = arm64-v8a
 android.skip_update = False
 
 # (bool) enables Android auto backup feature (Android API >=23)
-android.allow_backup = True
+# android.allow_backup = True
 
 [buildozer]
 
