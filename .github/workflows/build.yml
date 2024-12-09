@@ -34,7 +34,7 @@ jobs:
         virtualenv venv
         source venv/bin/activate
         pip install buildozer
-        buildozer init
+        # buildozer init
 
     - name: Build APK
       run: |
