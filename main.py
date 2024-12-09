@@ -6,14 +6,16 @@ from kivymd.app import MDApp
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.pickers import MDDatePicker
-from kivymd.uix.list import TwoLineAvatarIconListItem, ILeftBodyTouch
+from kivymd.uix.list import OneLineAvatarIconListItem, ILeftBodyTouch
 from kivymd.uix.selectioncontrol import MDCheckbox
 from datetime import datetime
+from kivy.lang import Builder
+import random
 
 # GitHub settings
 GITHUB_USERNAME = 'Ruudddiiii'
 REPO_NAME = 'TaskTravelTime'
-GITHUB_TOKEN = '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'
+GITHUB_TOKEN = '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'
 TASK_FILE = 'task1.json'
 
 # GitHub API URLs
@@ -72,7 +74,7 @@ class DialogContent(MDBoxLayout):
         date = value.strftime('%A %d %B %Y')
         self.ids.date_text.text = str(date)
 
-class ListItemWithCheckbox(TwoLineAvatarIconListItem):
+class ListItemWithCheckbox(OneLineAvatarIconListItem):
     '''Custom list item'''
 
     def __init__(self, pk=None, **kwargs):
@@ -104,7 +106,15 @@ class MainApp(MDApp):
     task_list_dialog = None
 
     def build(self):
-        self.theme_cls.primary_palette = "Orange"
+        palettes = [
+               "Red", "Pink", "Purple", "DeepPurple", "Indigo", 
+               "Blue", "LightBlue", "Cyan", "Teal", "Green", 
+               "LightGreen", "Lime", "Yellow", "Amber", "Orange", 
+               "DeepOrange", "Brown", "Gray", "BlueGray"
+           ]
+        selected_palette = random.choice(palettes)
+        self.theme_cls.primary_palette = selected_palette
+        self.theme_cls.theme_style = "Dark"  # Enable dark mode
 
     def show_task_dialog(self):
         if not self.task_list_dialog:
@@ -119,7 +129,7 @@ class MainApp(MDApp):
         try:
             tasks = load_tasks_from_github()
             for idx, task in enumerate(tasks):
-                add_task = ListItemWithCheckbox(pk=idx, text=str(task['name']), secondary_text="Due Date: None")
+                add_task = ListItemWithCheckbox(pk=idx, text=str(task['name']))
                 if task.get('completed'):
                     add_task.text = '[s]' + task['name'] + '[/s]'
                     add_task.ids.check.active = True
@@ -138,7 +148,7 @@ class MainApp(MDApp):
         save_tasks_to_github(tasks)
 
         self.root.ids['container'].add_widget(
-            ListItemWithCheckbox(pk=len(tasks)-1, text=f'[b]{task.text}[/b]', secondary_text="Due Date: None")
+            ListItemWithCheckbox(pk=len(tasks)-1, text=f'[b]{task.text}[/b]')
         )
         task.text = ''
 
