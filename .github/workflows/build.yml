@@ -31,15 +31,20 @@ jobs:
 
     - name: Download Android SDK
       run: |
-        mkdir -p ~/.buildozer/android/platform
+        mkdir -p ~/.buildozer/android/platform/cmdline-tools/latest
         curl -o sdk-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
-        unzip -q sdk-tools.zip -d ~/.buildozer/android/platform
+        unzip -q sdk-tools.zip -d ~/.buildozer/android/platform/cmdline-tools/latest
         rm sdk-tools.zip
+
+    - name: Set environment variables for Android SDK
+      run: |
+        echo "export ANDROID_HOME=$HOME/.buildozer/android/platform" >> $GITHUB_ENV
+        echo "export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH" >> $GITHUB_ENV
 
     - name: Install Android SDK Components
       run: |
-        yes | ~/.buildozer/android/platform/cmdline-tools/bin/sdkmanager --licenses
-        ~/.buildozer/android/platform/cmdline-tools/bin/sdkmanager "platform-tools" "build-tools;33.0.2" "platforms;android-31" "sources;android-31" "tools"
+        yes | sdkmanager --licenses
+        sdkmanager "platform-tools" "build-tools;33.0.2" "platforms;android-31" "sources;android-31"
 
     # - name: Initialize Buildozer
     #   run: |
