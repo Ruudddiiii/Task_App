@@ -29,14 +29,21 @@ jobs:
         pip install --upgrade pip
         pip install buildozer cython
 
+    - name: Download Android SDK
+      run: |
+        mkdir -p ~/.buildozer/android/platform
+        curl -o sdk-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+        unzip -q sdk-tools.zip -d ~/.buildozer/android/platform
+        rm sdk-tools.zip
+
+    - name: Install Android SDK Components
+      run: |
+        yes | ~/.buildozer/android/platform/cmdline-tools/bin/sdkmanager --licenses
+        ~/.buildozer/android/platform/cmdline-tools/bin/sdkmanager "platform-tools" "build-tools;33.0.2" "platforms;android-31" "sources;android-31" "tools"
+
     # - name: Initialize Buildozer
     #   run: |
     #     buildozer init
-
-    - name: Install Android SDK and NDK
-      run: |
-        mkdir -p ~/.buildozer/android/platform
-        buildozer android update
 
     - name: Build APK
       run: |
