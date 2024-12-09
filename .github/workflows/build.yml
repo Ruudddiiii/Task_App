@@ -22,7 +22,7 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install dependencies
+    - name: Install system dependencies
       run: |
         sudo apt update
         sudo apt install -y python3-pip openjdk-11-jdk git zip zlib1g-dev libncurses5-dev libffi-dev libssl-dev libreadline-dev libsqlite3-dev curl
@@ -32,6 +32,11 @@ jobs:
     # - name: Initialize Buildozer
     #   run: |
     #     buildozer init
+
+    - name: Install Android SDK and NDK
+      run: |
+        mkdir -p ~/.buildozer/android/platform
+        buildozer android update
 
     - name: Build APK
       run: |
