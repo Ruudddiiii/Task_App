@@ -25,24 +25,22 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libffi-dev libssl-dev python3-dev git zip unzip
-        sudo apt-get install -y build-essential
-        sudo apt-get install -y libstdc++6
-        sudo apt-get install -y aidl
-        # sudo apt install aidl
+        sudo apt-get install -y libffi-dev libssl-dev python3-dev build-essential git zip unzip openjdk-8-jdk
         pip install --upgrade pip
         pip install buildozer cython virtualenv
 
-    - name: Initialize Buildozer environment
+    - name: Install Android SDK tools
+      run: |
+        mkdir -p ~/.buildozer/android/platform
+        curl -sL https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -o commandlinetools.zip
+        unzip commandlinetools.zip -d ~/.buildozer/android/platform/android-sdk
+        yes | ~/.buildozer/android/platform/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=~/.buildozer/android/platform/android-sdk "platform-tools" "platforms;android-31" "build-tools;31.0.0"
+
+    - name: Build APK
       run: |
         virtualenv venv
         source venv/bin/activate
         pip install buildozer
-        # buildozer init
-
-    - name: Build APK
-      run: |
-        source venv/bin/activate
         buildozer -v android debug
 
     - name: Upload APK
