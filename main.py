@@ -15,7 +15,7 @@ import random
 # GitHub settings
 GITHUB_USERNAME = 'Ruudddiiii'
 REPO_NAME = 'TaskTravelTime'
-GITHUB_TOKEN = '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'
+GITHUB_TOKEN = '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'
 TASK_FILE = 'task1.json'
 
 # GitHub API URLs
