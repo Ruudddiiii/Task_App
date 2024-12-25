@@ -13,12 +13,13 @@ from kivy.lang import Builder
 import random
 
 # GitHub settings
-GITHUB_USERNAME = 'Ruudddiiiii'
-REPO_NAME = 'T'
-GITHUB_TOKEN = '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'
-TASK_FILE = 'Task.json'
+GITHUB_USERNAME = 'Ruudddiiii'
+REPO_NAME = 'TaskTravelTime'
+GITHUB_TOKEN = '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'
+TASK_FILE = 'task1.json'
 
 # GitHub API URLs
+RAW_FILE_URL = f'https://raw.githubusercontent.com/{GITHUB_USERNAME}/{REPO_NAME}/main/{TASK_FILE}'
 REPO_API_URL = f'https://api.github.com/repos/{GITHUB_USERNAME}/{REPO_NAME}/contents/{TASK_FILE}'
 
 # Function to load tasks from GitHub
