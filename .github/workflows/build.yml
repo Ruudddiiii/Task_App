@@ -5,6 +5,12 @@ jobs:
     name: Build for Android
     runs-on: ubuntu-20.04
     steps:
+      - name: Set up environment variables
+        run: echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+      
+      - name: Print GitHub Token
+        run: echo "GitHub Token is $GITHUB_TOKEN"
+        
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -22,9 +28,6 @@ jobs:
           sudo update-java-alternatives --set ${JAVA_HOME}
           export PATH=$JAVA_HOME/bin:$PATH
           yes | buildozer -v android debug
-
-      - name: Set up environment variables
-        run: echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
