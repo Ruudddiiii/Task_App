@@ -11,11 +11,12 @@ from kivymd.uix.selectioncontrol import MDCheckbox
 from datetime import datetime
 from kivy.lang import Builder
 import random
+import os
 
 # GitHub settings
 GITHUB_USERNAME = 'Ruudddiiii'
 REPO_NAME = 'TaskTravelTime'
-GITHUB_TOKEN = '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'
+GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
 TASK_FILE = 'task1.json'
 
 # GitHub API URLs
