@@ -13,10 +13,10 @@ from kivy.lang import Builder
 import random
 
 # GitHub settings
-GITHUB_USERNAME = 'Ruudddiiii'
-REPO_NAME = 'TaskTravelTime'
-GITHUB_TOKEN = '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'
-TASK_FILE = 'task1.json'
+GITHUB_USERNAME = 'Ruudddiiiii'
+REPO_NAME = 'T'
+GITHUB_TOKEN = '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'
+TASK_FILE = 'Task.json'
 
 # GitHub API URLs
 REPO_API_URL = f'https://api.github.com/repos/{GITHUB_USERNAME}/{REPO_NAME}/contents/{TASK_FILE}'
@@ -90,13 +90,13 @@ class ListItemWithCheckbox(OneLineAvatarIconListItem):
         else:
             the_list_item.text = tasks[self.pk]['name']
             tasks[self.pk]['completed'] = False
-        save_tasks_to_github(tasks)
+        # save_tasks_to_github(tasks)
 
     def delete_item(self, the_list_item):
         '''Delete the task'''
         tasks = load_tasks_from_github()
         tasks.pop(self.pk)
-        save_tasks_to_github(tasks)
+        # save_tasks_to_github(tasks)
         self.parent.remove_widget(the_list_item)
 
 class LeftCheckbox(ILeftBodyTouch, MDCheckbox):
@@ -107,11 +107,11 @@ class MainApp(MDApp):
 
     def build(self):
         palettes = [
-               "Red", "Pink", "Purple", "DeepPurple", "Indigo", 
-               "Blue", "LightBlue", "Cyan", "Teal", "Green", 
-               "LightGreen", "Lime", "Yellow", "Amber", "Orange", 
-               "DeepOrange", "Brown", "Gray", "BlueGray"
-           ]
+            "Red", "Pink", "Purple", "DeepPurple", "Indigo", 
+            "Blue", "LightBlue", "Cyan", "Teal", "Green", 
+            "LightGreen", "Lime", "Yellow", "Amber", "Orange", 
+            "DeepOrange", "Brown", "Gray", "BlueGray"
+        ]
         selected_palette = random.choice(palettes)
         self.theme_cls.primary_palette = selected_palette
         self.theme_cls.theme_style = "Dark"  # Enable dark mode
@@ -137,15 +137,34 @@ class MainApp(MDApp):
         except Exception as e:
             print(e)
 
+    def on_stop(self):
+        # Sync tasks to GitHub when the app is closed
+        tasks = self.get_current_tasks()
+        save_tasks_to_github(tasks)
+
+    def get_current_tasks(self):
+        """Retrieve current tasks from the list widget."""
+        tasks = []
+        for child in self.root.ids.container.children[::-1]:
+            task = {"name": child.text.strip('[b][/b]').strip('[s][/s]'), "completed": child.ids.check.active}
+            tasks.append(task)
+        return tasks
+
+    def sync_tasks(self):
+        """Sync tasks manually via the Sync button."""
+        tasks = self.get_current_tasks()
+        save_tasks_to_github(tasks)
+        print("Tasks synced manually.")
+
     def close_dialog(self, *args):
         self.task_list_dialog.dismiss()
 
     def add_task(self, task, task_date):
-        '''Add task to the list of tasks'''
+        """Add task to the list of tasks."""
         tasks = load_tasks_from_github()
         new_task = {"name": task.text, "completed": False}
         tasks.append(new_task)
-        save_tasks_to_github(tasks)
+        # save_tasks_to_github(tasks)
 
         self.root.ids['container'].add_widget(
             ListItemWithCheckbox(pk=len(tasks)-1, text=f'[b]{task.text}[/b]')

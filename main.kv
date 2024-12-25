@@ -13,12 +13,18 @@ MDFloatLayout:
         MDList:
             id: container
 
-
     MDFloatingActionButton:
         icon: 'plus-thick'
         on_release: app.show_task_dialog()
         elevation_normal: 12
-        pos_hint: {'x': .45 , 'y': .04}
+        pos_hint: {'x': .45, 'y': .04}
+
+    MDRaisedButton:
+        text: "Sync"
+        size_hint: None, None
+        size: dp(100), dp(40)
+        pos_hint: {'x': .05, 'y': .04}
+        on_release: app.sync_tasks()
 
 <DialogContent>:
     orientation: "vertical"
@@ -51,10 +57,11 @@ MDFloatLayout:
         MDRaisedButton:
             text: "SAVE"
             on_release: (app.add_task(task_text, date_text.text), app.close_dialog())
+            
         MDFlatButton:
             text: 'CANCEL'
             on_release: app.close_dialog()
-
+            
 
 <ListItemWithCheckbox>:
     id: the_list_item
@@ -71,3 +78,4 @@ MDFloatLayout:
         text_color: 1, 0, 0, 1
         on_release:
             root.delete_item(the_list_item)
+

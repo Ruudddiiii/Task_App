@@ -1,7 +1,8 @@
 [app]
 
+
 # (str) Title of your application
-title = Task App
+title = Task
 
 # (str) Package name
 package.name = myapp
@@ -13,7 +14,7 @@ package.domain = org.test
 source.dir = .
 
 # (str) Icon of the application
-# icon.filename = icon.png
+icon.filename = icon.png
 
 # (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,kv,atlas
@@ -52,3 +53,4 @@ log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
 warn_on_root = 1
+
