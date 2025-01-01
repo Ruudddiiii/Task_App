@@ -13,6 +13,9 @@ jobs:
         
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Accept Android SDK licenses 
+        run: | 
+         yes | sdkmanager --licenses
 
       - name: Buildozer dependencies
         run: |
