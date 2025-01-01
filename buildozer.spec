@@ -32,7 +32,7 @@ orientation = portrait
 fullscreen = 0
 
 # (list) Permissions
-android.permissions = "android.permission.INTERNET" 
+android.permission.INTERNET
 
 # (int) Target Android API, should be as high as possible.
 android.api = 31
