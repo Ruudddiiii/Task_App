@@ -18,9 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: start bot
+      - name: Set up environment variables
         env:
           GITHUB_TOKEN: ${{ secrets.TT }}
+        run: echo "Environment variable GITHUB_TOKEN has been set."
 
       # Used to cache dependencies with a timeout
       - name: Get Date
