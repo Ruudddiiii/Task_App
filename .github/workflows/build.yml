@@ -21,6 +21,7 @@ jobs:
       - name: Set up environment variables
         run: |
           echo "GITHUB_TOKEN=${{ secrets.TT }}" >> $GITHUB_ENV
+        shell: bash
 
       # Used to cache dependencies with a timeout
       - name: Get Date
