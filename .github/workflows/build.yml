@@ -17,11 +17,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Set up environment variables
-        env:
-          GITHUB_TOKEN: ${{ secrets.TT }}
-        run: echo "Environment variable GITHUB_TOKEN has been set."
 
       # Used to cache dependencies with a timeout
       - name: Get Date
@@ -119,6 +114,8 @@ jobs:
       # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.TT }}
         with:
           python-version: '3.10' #set your python version
 
