@@ -114,8 +114,6 @@ jobs:
       # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.TT }}
         with:
           python-version: '3.10' #set your python version
 
@@ -128,6 +126,8 @@ jobs:
       # Build with Buildozer
       - name: Build with Buildozer
         id: buildozer
+        env:
+          GITHUB_TOKEN: ${{ secrets.TT }}
         run: |
           yes | buildozer -v android debug
         # yes | buildozer -v android release
