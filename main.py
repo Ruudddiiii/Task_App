@@ -17,7 +17,8 @@ import os
 GITHUB_USERNAME = 'Ruudddiiii'
 REPO_NAME = 'TaskTravelTime'
 # GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
-GITHUB_TOKEN = os.environ['GITHUB_TOKEN']
+GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+# GITHUB_TOKEN = os.environ['GITHUB_TOKEN']
 TASK_FILE = 'task1.json'
 
 # GitHub API URLs
