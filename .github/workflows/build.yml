@@ -19,8 +19,14 @@ jobs:
       - uses: actions/checkout@v4
 
       # Used to cache dependencies with a timeout
-      - name: Set up environment variables
-        run: echo "GITHUB_TOKEN=${{ secrets.TT }}" >> $GITHUB_ENV
+      # - name: Set up environment variables
+      #   run: echo "GITHUB_TOKEN=${{ secrets.TT }}" >> $GITHUB_ENV
+
+      - name: Set up environment variable  
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.TT }}
+        run: |
+          echo "GITHUB_TOKEN=$AWS_ACCESS_KEY_ID" >> $GITHUB_ENV
 
         
       - name: Get Date
