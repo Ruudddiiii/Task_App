@@ -27,6 +27,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.TT }}
         run: |
           echo "GITHUB_TOKEN=$AWS_ACCESS_KEY_ID" >> $GITHUB_ENV
+        shell: bash
 
         
       - name: Get Date
